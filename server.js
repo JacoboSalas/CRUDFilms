@@ -3,7 +3,8 @@ const bodyParser= require('body-parser');
 const app = express();
 const MongoClient = require('mongodb').MongoClient;
 
-var MONGODB_URL = "mongodb://JacoboSalas:Passw0rd_@cluster0-shard-00-00-jylxy.mongodb.net:27017,cluster0-shard-00-01-jylxy.mongodb.net:27017,cluster0-shard-00-02-jylxy.mongodb.net:27017/<DATABASE>?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin";
+var MONGODB_URL = "mongodb://JacoboSalas:Passw0rd_@cluster0-shard-00-00-jylxy.mongodb.net:27017/filmsDB?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin";
+
 
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -11,15 +12,11 @@ var db;
 
 MongoClient.connect(MONGODB_URL, (err, database) => {
   if (err) return console.log(err)
-  db = database
+  db = database;
   app.listen(3000, () => {
     console.log('listening on 3000')
   });
 });
-
-app.listen(3000, function() {
-  console.log('listening on 3000')
-})
 
 
 
@@ -32,9 +29,26 @@ app.get('/', (req, res) => {
 });
 
 
-app.post('/film', (req, res) => {
-  console.log(req.body)
-});
+
+app.post('/films', (req, res) => {
+  db.collection('film').save(req.body, (err, result) => {
+    if (err) return console.log(err)
+
+    console.log('saved to database')
+    res.redirect('/')
+  })
+})
+
+app.get('/films', (req, res) => {
+  //var cursor = db.collection('film').find();
+  
+  db.collection('film').find().toArray(function(err, results) {
+  console.log(results)
+  // send HTML file populated with quotes here
+	})
+  
+})
+
 
 
 
@@ -54,5 +68,8 @@ app.post('/film', (req, res) => {
 	USUARIO PARA LECTURA/ESCRITURA:
 	dbuser
 	dbuser01_
+	
+	Nombre de la BBDD: 
+	films_database
 
 */
