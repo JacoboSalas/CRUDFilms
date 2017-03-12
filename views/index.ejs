@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MY APP</title>
+</head>
+<script>
+
+</script>
+<body>
+  May Node and Express be with you.
+
+  <ul class="film">
+  <% for(var i=0; i<film.length; i++) {%>
+    <li class="film">
+      <span><%= film[i].id %></span>
+      <span><%= film[i].title %></span>
+	  <span><%= film[i].description %></span>
+	  <span><%= film[i].rating %></span>
+	  <span><%= film[i].released %></span>
+		<form action="/films/delete?id=<%= film[i].id %>" method="POST">
+			<button type="submit">Delete <%= film[i].id %> </button>
+		</form>
+    </li>
+  <% } %>
+  </ul>
+
+  <form action="/film" method="POST">
+    <input type="text" placeholder="name" name="name">
+    <input type="text" placeholder="quote" name="quote">
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>
