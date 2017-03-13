@@ -47,23 +47,46 @@ app.get('/films', (req, res) => {
     if (err) return console.log(err)
     // renders index.ejs
     res.render('index.ejs', {film: result});
-  })
+  });
 });
 
 
 
-app.post('/films/delete', function (req, res) {
+app.post('/films/delete', (req, res) => {
 	console.log('Deeleted  '+ req.query.id);
   res.send('DELETE request to homepage');
   var elID = req.query.id ;
   db.collection("film").remove( { "id" : elID });
 
   
-  
 });
 
 
+app.post('/films/update', (req, res) => {
+	console.log('para update  '+ req.query.id);
+	var result = { 
+		"id":req.query.id ,
+		"title": req.query.title ,
+		"description": req.query.description ,
+		"rating": req.query.rating ,
+		"released": req.query.released 
+	};
+	console.log('para update  '+ JSON.stringify(result));
+	res.render('updateFilm.ejs', {film: result});
+	
+});
 
+
+app.post('/films/updateDo', (req, res) => {
+	console.log('haciendo el update de : '+ req.query.id);
+
+	db.collection('film').update(
+		{ id:  req.query.id},
+		req.body,
+		{ upsert: true }
+	);
+	res.redirect('/films');
+});
 
 /*
 	DETALLES MONGO DB:

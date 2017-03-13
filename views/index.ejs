@@ -8,7 +8,7 @@
 
 </script>
 <body>
-  May Node and Express be with you.
+  List of films.
 
   <ul class="film">
   <% for(var i=0; i<film.length; i++) {%>
@@ -21,14 +21,12 @@
 		<form action="/films/delete?id=<%= film[i].id %>" method="POST">
 			<button type="submit">Delete <%= film[i].id %> </button>
 		</form>
+		<form action="/films/update?id=<%= film[i].id %>&title=<%= film[i].title%>&description=<%= film[i].description %>&rating=<%= film[i].rating %>&released=<%= film[i].released %>" method="POST">
+			<button type="submit">Update <%= film[i].id %> </button>
+		</form>
     </li>
   <% } %>
   </ul>
 
-  <form action="/film" method="POST">
-    <input type="text" placeholder="name" name="name">
-    <input type="text" placeholder="quote" name="quote">
-    <button type="submit">Submit</button>
-  </form>
 </body>
 </html>

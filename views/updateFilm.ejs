@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MY APP</title>
+</head>
+<script>
+
+</script>
+<body>
+  List of films.
+
+  <ul class="film">
+  
+	<form action="/films/updateDo?id=<%= film.id %>" method="POST">
+	  <input type="text" placeholder="id" name="id" value="<%= film.id %>" readonly><br/>
+	  <input type="text" placeholder="title" name="title" value="<%= film.title %>"><br/>
+	  <input type="text" placeholder="description" name="description" value="<%= film.description %>"><br/>
+	  <input type="text" placeholder="rating" name="rating" value="<%= film.rating %>"><br/>
+	  <input type="text" placeholder="released" name="released" value="<%= film.released %>"><br/>
+  
+	  <button type="submit">UpdateMe</button>
+	</form>
+		<span><a href="/films">Cancell</a></span>
+    
+  
+  </ul>
+
+</body>
+</html>
