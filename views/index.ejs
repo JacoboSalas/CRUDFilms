@@ -3,30 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <title>MY APP</title>
+  <style>
+	table, th, td {
+		border: 1px solid black;
+	}
+  </style>
 </head>
-<script>
-
-</script>
 <body>
-  List of films.
-
-  <ul class="film">
-  <% for(var i=0; i<film.length; i++) {%>
-    <li class="film">
-      <span><%= film[i].id %></span>
-      <span><%= film[i].title %></span>
-	  <span><%= film[i].description %></span>
-	  <span><%= film[i].rating %></span>
-	  <span><%= film[i].released %></span>
+  <h1>List of films</h1>
+  <table style="width:100%">
+	<tr>
+		<th>id</th>
+		<th>title</th>
+		<th>description</th>
+		<th>rating</th>
+		<th>released</th>
+		<th></th>
+	</tr>
+	<% for(var i=0; i<film.length; i++) {%>
+	  <tr>
+		<th><%= film[i].id %></th>
+		<th><%= film[i].title %></th>
+		<th><%= film[i].description %></th>
+		<th><%= film[i].rating %></th>
+		<th><%= film[i].released %></th>
+		<th>
 		<form action="/films/delete?id=<%= film[i].id %>" method="POST">
-			<button type="submit">Delete <%= film[i].id %> </button>
+			<button type="submit">Delete</button>
 		</form>
 		<form action="/films/update?id=<%= film[i].id %>&title=<%= film[i].title%>&description=<%= film[i].description %>&rating=<%= film[i].rating %>&released=<%= film[i].released %>" method="POST">
-			<button type="submit">Update <%= film[i].id %> </button>
+			<button type="submit">Update</button>
 		</form>
-    </li>
-  <% } %>
-  </ul>
-
+		</th>
+	  </tr>
+	<% } %>
+  </table>
+  <br>
+  <span><a href="/">Insert new film</a></span>
 </body>
 </html>

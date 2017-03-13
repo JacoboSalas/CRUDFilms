@@ -18,9 +18,6 @@ MongoClient.connect(MONGODB_URL, (err, database) => {
   });
 });
 
-
-
-
 //inicial
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/pages/index.html')
@@ -28,40 +25,32 @@ app.get('/', (req, res) => {
   // Mine was '/Users/zellwk/Projects/demo-repos/crud-express-mongo' for this app.
 });
 
-
-//insert en la colección film
+//insertar en la colección
 app.post('/films', (req, res) => {
   db.collection('film').save(req.body, (err, result) => {
     if (err) return console.log(err)
-
     console.log('saved to database');
     res.redirect('/');
   })
 });
 
 //obtener las películas de la colección
-
-
 app.get('/films', (req, res) => {
   db.collection('film').find().toArray((err, result) => {
     if (err) return console.log(err)
-    // renders index.ejs
     res.render('index.ejs', {film: result});
   });
 });
 
-
-
+//borrar de la colección
 app.post('/films/delete', (req, res) => {
-	console.log('Deeleted  '+ req.query.id);
-  res.send('DELETE request to homepage');
+  console.log('Deleted  '+ req.query.id);
   var elID = req.query.id ;
-  db.collection("film").remove( { "id" : elID });
-
-  
+  db.collection("film").remove({ "id" : elID });
+  res.redirect('/films');
 });
 
-
+//modificar en la colección
 app.post('/films/update', (req, res) => {
 	console.log('para update  '+ req.query.id);
 	var result = { 
@@ -73,13 +62,10 @@ app.post('/films/update', (req, res) => {
 	};
 	console.log('para update  '+ JSON.stringify(result));
 	res.render('updateFilm.ejs', {film: result});
-	
 });
-
 
 app.post('/films/updateDo', (req, res) => {
 	console.log('haciendo el update de : '+ req.query.id);
-
 	db.collection('film').update(
 		{ id:  req.query.id},
 		req.body,
@@ -87,24 +73,3 @@ app.post('/films/updateDo', (req, res) => {
 	);
 	res.redirect('/films');
 });
-
-/*
-	DETALLES MONGO DB:
-	https://cloud.mongodb.com/v2/58c588ccdf9db155f75b8d61#clusters/security/users
-	
-	mongodb DBaaS Passw0rd_
-	Choose a name for your new MongoDB Atlas Group:
-		JacoboAtlasGroup
-
-	Admin Username & Password:
-	JacoboSalas
-	Passw0rd_
-	
-	USUARIO PARA LECTURA/ESCRITURA:
-	dbuser
-	dbuser01_
-	
-	Nombre de la BBDD: 
-	films_database
-
-*/
