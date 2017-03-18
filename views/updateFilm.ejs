@@ -10,7 +10,7 @@
 <body>
   <h1>Update film</h1>
   <form action="/films/updateDo?id=<%= film.id %>" method="POST">
-	<input type="text" placeholder="id" name="id" value="<%= film.id %>" readonly><br/>
+	<input type="text" placeholder="id" name="id" value="<%= film.id %>" readonly hidden><br/>
 	<input type="text" placeholder="title" name="title" value="<%= film.title %>"><br/>
 	<input type="text" placeholder="description" name="description" value="<%= film.description %>"><br/>
 	<input type="text" placeholder="rating" name="rating" value="<%= film.rating %>"><br/>

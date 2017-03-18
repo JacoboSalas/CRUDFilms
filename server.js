@@ -45,16 +45,19 @@ app.get('/films', (req, res) => {
 //borrar de la colección
 app.post('/films/delete', (req, res) => {
   console.log('Deleted  '+ req.query.id);
-  var elID = req.query.id ;
-  db.collection("film").remove({ "id" : elID });
+  var ObjectId = require('mongodb').ObjectId;
+  var id = req.query.id;
+  db.collection("film").remove({ "_id" : ObjectId(id) });
   res.redirect('/films');
 });
 
 //modificar en la colección
 app.post('/films/update', (req, res) => {
 	console.log('para update  '+ req.query.id);
+	//var ObjectId = require('mongodb').ObjectId;
+	//var id = req.query.id;
 	var result = { 
-		"id":req.query.id ,
+		"id" : req.query.id ,
 		"title": req.query.title ,
 		"description": req.query.description ,
 		"rating": req.query.rating ,
@@ -66,8 +69,10 @@ app.post('/films/update', (req, res) => {
 
 app.post('/films/updateDo', (req, res) => {
 	console.log('haciendo el update de : '+ req.query.id);
+	var ObjectId = require('mongodb').ObjectId;
+	var id = req.query.id;
 	db.collection('film').update(
-		{ id:  req.query.id},
+		{ _id:  ObjectId(id)},
 		req.body,
 		{ upsert: true }
 	);

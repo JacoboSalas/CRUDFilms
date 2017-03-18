@@ -10,10 +10,10 @@
   </style>
 </head>
 <body>
-  <h1>List of films</h1>
+  <h1>Film collection</h1>
   <table style="width:100%">
 	<tr>
-		<th>id</th>
+		<th hidden>id</th>
 		<th>title</th>
 		<th>description</th>
 		<th>rating</th>
@@ -22,16 +22,16 @@
 	</tr>
 	<% for(var i=0; i<film.length; i++) {%>
 	  <tr>
-		<th><%= film[i].id %></th>
+		<th hidden><%= film[i]._id %></th>
 		<th><%= film[i].title %></th>
 		<th><%= film[i].description %></th>
 		<th><%= film[i].rating %></th>
 		<th><%= film[i].released %></th>
 		<th>
-		<form action="/films/delete?id=<%= film[i].id %>" method="POST">
+		<form action="/films/delete?id=<%= film[i]._id.toString() %>" method="POST">
 			<button type="submit">Delete</button>
 		</form>
-		<form action="/films/update?id=<%= film[i].id %>&title=<%= film[i].title%>&description=<%= film[i].description %>&rating=<%= film[i].rating %>&released=<%= film[i].released %>" method="POST">
+		<form action="/films/update?id=<%= film[i]._id.toString() %>&title=<%= film[i].title%>&description=<%= film[i].description %>&rating=<%= film[i].rating %>&released=<%= film[i].released %>" method="POST">
 			<button type="submit">Update</button>
 		</form>
 		</th>
