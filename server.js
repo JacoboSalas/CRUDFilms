@@ -21,22 +21,24 @@ MongoClient.connect(MONGODB_URL, (err, database) => {
 //inicial
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/pages/index.html')
-  // Note: __dirname is directory that contains the JavaScript source code. Try logging it and see what you get!
-  // Mine was '/Users/zellwk/Projects/demo-repos/crud-express-mongo' for this app.
 });
 
 //insertar en la colección
+app.get('/insert', (req, res) => {
+  res.render('insertFilm.ejs');
+});
+
 app.post('/films', (req, res) => {
   db.collection('film').save(req.body, (err, result) => {
     if (err) return console.log(err)
     console.log('saved to database');
-    res.redirect('/');
+    res.redirect('/films');
   })
 });
 
 //obtener las películas de la colección
 app.get('/films', (req, res) => {
-  db.collection('film').find().toArray((err, result) => {
+  db.collection('film').find().sort({ released: 1 }).toArray((err, result) => {
     if (err) return console.log(err)
     res.render('index.ejs', {film: result});
   });
@@ -54,8 +56,6 @@ app.post('/films/delete', (req, res) => {
 //modificar en la colección
 app.post('/films/update', (req, res) => {
 	console.log('para update  '+ req.query.id);
-	//var ObjectId = require('mongodb').ObjectId;
-	//var id = req.query.id;
 	var result = { 
 		"id" : req.query.id ,
 		"title": req.query.title ,

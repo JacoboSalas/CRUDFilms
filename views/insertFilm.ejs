@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MY APP</title>
+</head>
+<script>
+
+</script>
+<body style="background-color:lightblue;">
+  <h1>Add film</h1>
+  <form action="/films" method="POST">
+	  <input type="text" placeholder="title" name="title" required><br/>
+	  <input type="text" placeholder="description" name="description" required><br/>
+	  <input type="number" min="0" max="10" step="0.05" placeholder="0.00" name="rating" required><br/>
+	  <input type="date" placeholder="released" name="released" required><br/>
+	  <button type="submit" style="font-weight: bold;">&#10004;</button>
+	</form>
+  <br/>
+  <table style="width:auto">
+  <tr>
+    <td><form action="/"><input type="submit" value="&#127968;"></form></td>
+    <td><form action="/films"><input type="submit" value="Collection"></form></td>
+  </tr>
+  </table>
+</body>
+</html>

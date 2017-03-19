@@ -4,16 +4,14 @@
   <meta charset="UTF-8">
   <title>MY APP</title>
 </head>
-<body>
-  <h1>Insert new film</h1>
-  <form action="/films" method="POST">
-	  <input type="text" placeholder="title" name="title"><br/>
-	  <input type="text" placeholder="description" name="description"><br/>
-	  <input type="text" placeholder="rating" name="rating"><br/>
-	  <input type="text" placeholder="released" name="released"><br/>
-	  <button type="submit">Submit</button>
-	</form>
-  <br/>
-  <span><a href="/films">Film collection</a></span>
+<body style="background-color:lightblue;">
+  <h1>Welcome to my film collection</h1>
+  <img src="http://www.cineshow.fr/wp-content/uploads/2016/05/Cine%CC%81ma-Voyage.jpg" width=100%>
+  <table style="width:auto">
+  <tr>
+    <td><form action="/films"><input type="submit" value="Enter collection" style="font-weight:bold;"></form></td>
+    <td><form action="/insert"><input type="submit" value="Add to collection" style="font-weight:bold;"></form></td>
+  </tr>
+  </table>
 </body>
 </html>

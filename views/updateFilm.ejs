@@ -4,20 +4,16 @@
   <meta charset="UTF-8">
   <title>MY APP</title>
 </head>
-<script>
-
-</script>
-<body>
+<body style="background-color:lightblue;">
   <h1>Update film</h1>
   <form action="/films/updateDo?id=<%= film.id %>" method="POST">
 	<input type="text" placeholder="id" name="id" value="<%= film.id %>" readonly hidden><br/>
-	<input type="text" placeholder="title" name="title" value="<%= film.title %>"><br/>
-	<input type="text" placeholder="description" name="description" value="<%= film.description %>"><br/>
-	<input type="text" placeholder="rating" name="rating" value="<%= film.rating %>"><br/>
-	<input type="text" placeholder="released" name="released" value="<%= film.released %>"><br/>
+	<input type="text" placeholder="title" name="title" value="<%= film.title %>" required><br/>
+	<input type="text" placeholder="description" name="description" value="<%= film.description %>" required><br/>
+	<input type="number" min="0" max="10" step="0.05" placeholder="0.00" name="rating" value="<%= film.rating %>" required><br/>
+	<input type="date" placeholder="released" name="released" value="<%= film.released %>" required><br/>
 	<button type="submit">Update</button>
+	<input class="button" type="button" onclick="window.location.replace('/films')" value="Cancel"/>
   </form>
-  <br>
-  <span><a href="/films">Cancel</a></span>
 </body>
 </html>

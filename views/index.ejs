@@ -3,21 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <title>MY APP</title>
-  <style>
-	table, th, td {
-		border: 1px solid black;
-	}
-  </style>
+  <!-- <style> -->
+	<!-- table, th, td { -->
+		<!-- border: 1px solid black; -->
+	<!-- } -->
+  <!-- </style> -->
 </head>
-<body>
+<body style="background-color:lightblue;">
   <h1>Film collection</h1>
-  <table style="width:100%">
+  <table style="width:100%" border="1px solid black">
 	<tr>
 		<th hidden>id</th>
-		<th>title</th>
-		<th>description</th>
-		<th>rating</th>
-		<th>released</th>
+		<th style="font-weight:bold;">Title</th>
+		<th style="font-weight:bold;">Description</th>
+		<th style="font-weight:bold;">Rating</th>
+		<th style="font-weight:bold;">Released</th>
 		<th></th>
 	</tr>
 	<% for(var i=0; i<film.length; i++) {%>
@@ -29,16 +29,21 @@
 		<th><%= film[i].released %></th>
 		<th>
 		<form action="/films/delete?id=<%= film[i]._id.toString() %>" method="POST">
-			<button type="submit">Delete</button>
+			<button type="submit" style="font-weight:bold;">&#10006;</button>
 		</form>
 		<form action="/films/update?id=<%= film[i]._id.toString() %>&title=<%= film[i].title%>&description=<%= film[i].description %>&rating=<%= film[i].rating %>&released=<%= film[i].released %>" method="POST">
-			<button type="submit">Update</button>
+			<button type="submit">&#9998;</button>
 		</form>
 		</th>
 	  </tr>
 	<% } %>
   </table>
   <br>
-  <span><a href="/">Insert new film</a></span>
+  <table style="width:auto">
+  <tr>
+    <td><form action="/"><input type="submit" value="&#127968;"></form></td>
+    <td><form action="/insert"><input type="submit" value="&#10010;"></form></td>
+  </tr>
+  </table>
 </body>
 </html>
